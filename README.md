@@ -3,6 +3,7 @@ An in house Python tool to truth(the capture of address text) a directory of ima
 NicK:
 Ok. Turns out I could not get the address directory files on github(too large) to run the C executable. The executable was compiled on Linux, which is why I had instructions below for 'wsl' on Windows.
 You can skip the 'wsl' parts. The last python script will abort without doing the USPS database lookups. Path separators will depend will be '\' on Windows.
+Ugh. I had to install Visual C++ Redistributable of Visual Studio to use 'opencv' on Windows.
 
 1) 'wsl --install' from Windows terminal and restart windows (This is Linux)
 2) In Windows terminal, 'wsl'.
