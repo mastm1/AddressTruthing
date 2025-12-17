@@ -1,0 +1,67 @@
+PAD_X: 5
+TESSERACT_SINGLE_LINE: --psm 7
+TESSERACT_MULTI_LINE: --psm 3
+SCALE: .26
+EXTRA_SCROLL: 50
+ROI_SCALES:
+  - 1.0
+  - 1.2
+  - 1.4
+  - 1.5
+EXTENSIONS:
+  - tiff
+  - tif
+  - jpeg
+  - jpg
+  - bmp
+  - png
+ROTATIONS:
+  - 2.0
+  - -2.0
+  - 10.0
+  - -10.0
+  - 90.0
+  - -90.0
+CANVAS_SIDE:
+  X: 820
+  Y: 770
+BGR_BLACK:
+  - 0
+  - 0
+  - 0
+BGR_BLUE:
+  - 240
+  - 0
+  - 0
+LINUX:
+  TESSDATA_PREFIX:
+    - /usr/share/tesseract-ocr/4.00/tessdata/
+    - /usr/share/tesseract-ocr/5/tessdata/
+    - ./tessdata
+  TESSERACT_CMD:
+    - /usr/bin/tesseract
+    - ./bin/tesseract
+  TOP_CANVAS_X: 1000
+  TOP_CANVAS_Y: 2
+  TOP_ROI_CANVAS_COORDS: +10+600
+  MASTER_GEOMETRY: 1000x500+1+1
+  FONT:
+    - Arial
+    - 8
+    - bold
+  UNRESOLVABLE_BUTTON_ON: false
+WINDOWS:
+  TESSERACT_CMD:  C:\Program Files\Tesseract-OCR\tesseract
+  TOP_CANVAS_X: 680
+  TOP_CANVAS_Y: 2
+  TOP_ROI_CANVAS_COORDS: +10+400
+  MASTER_GEOMETRY: 780x380+1+1
+  FONT:
+    - Arial
+    - 12
+    - bold
+  UNRESOLVABLE_BUTTON_ON: true
+TEXT_AREA_FONT:
+  - Arial
+  - 18
+  - bold
