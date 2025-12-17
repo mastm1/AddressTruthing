@@ -1,0 +1,56 @@
+MAX_DISTANCE:
+  -1:
+    LOW: 0
+    HIGH: 1
+  0:
+    LOW: 2
+    HIGH: 4
+  1:
+    LOW: 5
+    HIGH: 8
+  2:
+    LOW: 9
+    HIGH: 11
+  3:
+    LOW: 12
+    HIGH: 14
+  4:
+    LOW: 15
+    HIGH: 18
+  5:
+    LOW: 19
+    HIGH: 19
+CURRENT:
+  - CURRENT
+  - RESIDENT
+  - OCCUPANT
+CLEAN:
+  - MD
+  - ATTN
+  - C/O
+  - ASSC
+  - LTD
+  - LLC
+  - PLC
+  - PC
+  - ESQ
+  - PHD
+  - HOUSEHOLD
+  - THE
+  - LLM
+  - ASSOC
+  - AND
+  - DO
+  - INC
+  - CORP
+  - COMPANY
+  - MD
+  - DSS
+  - USA
+  - MR
+  - MRS
+  - MS
+  - DR
+  - CO
+NEW_ARRAY_LENGTH: 3
+IES_DATA_LENGTH: 13

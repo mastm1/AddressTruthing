@@ -1,0 +1,14 @@
+IS_WINDOWS: False
+LINUX:
+  ADDRESS_MATCHER_EXE: ./address_matcher
+  ADDRESS_MATCHER_CONFIG: ./AddressMatcher.cfg
+  PCOA_DB_FILE: /home/mast/Databases/FPARS/PCOA.db
+LINUX_WINDOWS:
+    ADDRESS_MATCHER_EXE: ./address_matcher
+    ADDRESS_MATCHER_CONFIG: ./AddressMatcher.cfg
+    PCOA_DB_FILE: /mnt/c/Users/mast/addressmatcher/FPARS/PCOA.db
+WINDOWS:
+  ADDRESS_MATCHER_EXE: /home/mast/ocr/address_matcher/bin/address_matcher
+  ADDRESS_MATCHER_CONFIG: /home/mast/ocr/AddressMatcher.cfg
+  PCOA_DB_FILE: /home/mast/Databases/FPARS/PCOA.db
+NICKNAMES_FILE: ./util/nicknames.txt
