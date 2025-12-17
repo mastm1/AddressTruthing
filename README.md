@@ -9,7 +9,8 @@ You can skip the 'wsl' parts. The last python script will abort without doing th
 3) Clone the repository on your machine: 
 4) On GitHub, navigate to the main page of the repository. 
 5) Above the list of files, click 'Code'. 
-6) under "HTTPS", click 'copy' icon d) In 'wsl' terminal, 'git clone ' in a suitable directory. 
+6) under "HTTPS", click 'copy' icon d) In 'wsl' terminal,
+7) 'git clone https://github.com/mastm1/AddressTruthing.git'
 d) In 'wsl' terminal, enter 'cd /MailPieceTruthing' e) Enter 'chmod 755 *'
 8) 'conda env create -f environment.yml'
 9) 'conda activate fpars_env'
