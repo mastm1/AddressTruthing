@@ -1,0 +1,12 @@
+name: fpars_env
+channels:
+  - defaults
+dependencies:
+  - python=3.13
+  - conda-forge::opencv
+  - conda-forge::pillow
+  - conda-forge::pytesseract
+  - conda-forge::pyaml
+  - imagecodecs
+  - tifffile
+prefix: /home/mast/anaconda3/envs/fpars_env
