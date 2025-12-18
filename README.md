@@ -23,4 +23,5 @@ Ok. I just realized that 'teeseract_ocr' needs to be installed. This is in addit
 14) 'python mainFPARS.py -s A3.sqlite3' (executes the "truther", try it out)
 15) Rubberband around the address in the image. Then rubberband around a region(a line or lines) in the newly created image to execute OCR.
 16) 'python MatchWithPostalDatabase.py -s A3.sqlite3' (Performs USPS lookup of the OCR results and gives 11 digit ZIP, if successful).
-17) The final post-processing script ('MatchWithPostalDatabse.py') is NOT fully operational! It requires US Postal Service address data which I cannot provide.
+17) 'python exportFPParsOCR.py -s A3.sqlite3' (Writes out saved raw text truths to stdout.)
+18) The final post-processing script ('MatchWithPostalDatabse.py') is NOT fully operational! It requires US Postal Service address data which I cannot provide.
