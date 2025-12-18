@@ -3,12 +3,12 @@ An in house Python tool to truth(the capture of address text) a directory of ima
 NicK:
 Ok. I just realized that 'teeseract_ocr' needs to be installed. This is in addition to the python package wrapper 'pytesseract'). Also, it would need to be installed separately for both wsl linux and windows, depending on your preference.
 1) Turns out I could not get the address directory files on github(too large) to run the C executable. The executable was compiled on Linux, which is why I had instructions below for 'wsl' on Windows. Not to mention the fact that the data is from non-public US Postal Service sources...
-2) You can skip the 'wsl' parts. The last python script will abort without doing the USPS database lookups. Path separators will depend will be '\' on Windows. Still working on it...
+2) The last python script will abort without doing the USPS database lookups. 
 3) Ugh. I had to install Visual C++ Redistributable of Visual Studio to use 'opencv' on Windows and I'm stillg getting an error.
-4) Probably best to stick with 'wsl'...
+4) Best to stick with 'wsl'...
 
-1) 'wsl --install' from Windows terminal and restart windows (This is Linux)
-2) In Windows terminal, 'wsl'.
+1) 'wsl --install' from Windows terminal and restart windows (This is the Linux emulator)
+2) In a Windows terminal, 'wsl'.
 3) 'sudo apt-get install tesseract-ocr' (will ask for your password)
 4) Clone the repository on your machine: 
 5) On GitHub, navigate to the main page of the repository. 
