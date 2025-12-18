@@ -1,6 +1,7 @@
 import sqlite3
 from typing import List, Tuple
-from os.path import isfile, getsize
+from os.path import getsize
+from pathlib import Path
 import sys
 
 class DB(object):
@@ -27,6 +28,7 @@ class DB(object):
     def executemany(self, sql: str, params:Tuple=()):
         self.conn.cursor().executemany(sql, params)
         self.conn.commit()
+
     def executemultiplecommands(self, sql:list[list[str | tuple[str]] | list[str | tuple[str, int, str, any, any, str, float]] | list[str | tuple[float, str, str]]]):
         for sql_command in sql:
             if not sql_command[0].upper().startswith('SELECT'):
@@ -36,7 +38,7 @@ class DB(object):
         self.conn.commit()
 
 def isSQLite3(filename):
-    if not isfile(filename):
+    if not Path(filename).is_file():
         return False
     if getsize(filename) < 100:  # SQLite database file header is 100 bytes
         return False

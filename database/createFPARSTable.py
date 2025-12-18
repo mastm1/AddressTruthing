@@ -1,5 +1,3 @@
-import sqlite3
-
 from database.sqlite3db import DB
 import traceback
 
