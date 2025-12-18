@@ -1,6 +1,7 @@
 import subprocess
 import argparse
 import  os
+from pathlib import Path
 from unittest import case
 
 from database.sqlite3db import DB
@@ -34,7 +35,6 @@ def print_address_matcher_results(am_list):
     for ln in am_list:
         id = nm = zipcode = primary = pre_directional = streetname = suffix = \
             post_directional = firm = secondary_abbr = secondary_num = ""
-        # Implement a named_tuple instead?
         for i,am in enumerate(ln.split(',')):
             am = am.strip()
             match i:
@@ -103,7 +103,7 @@ if __name__ == '__main__':
         sqliteDB = args["sqlite"]
     else:
         sqliteDB = input("Enter path and name OF the sqlite file: ")
-        if not os.path.exists(sqliteDB):
+        if not Path(sqliteDB).is_file():
             print("ERROR: valid sqlite db required...")
             ap.print_help()
             quit()
@@ -135,5 +135,4 @@ if __name__ == '__main__':
         sys.stderr.write("The PCOA (forwarding address database) is not currently operational." + os.linesep)
 
     sys.stderr.flush()
-
 

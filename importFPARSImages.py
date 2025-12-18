@@ -10,33 +10,33 @@ import time
 from pathlib import Path
 
 TRUTH_DB = "FPARS.sqlite3",
-EXTENSIONS = ["tif","tiff","png","jpg"]
+EXTENSIONS = [".tif",".tiff",".png",".jpg",".TIF",".TIFF"]
 ###############
 def import_images(db,image_dir):
     image_dir_path = Path(image_dir)
     if image_dir_path.is_dir():
         try:
             db.execute("INSERT INTO PATH(image_dir,time) VALUES (?,?)", (image_dir,time.time()))
-            #Sprint("INSERT EXECUTED" + image_dir)
         except Exception:
             print("INSERT PATH NOT EXECUTED: " + image_dir)
     else:
         print("INSERT PATH IS NOT a VALID DIRECTORY (ABORT): " + image_dir)
         sys.exit(0)
-    for extension in EXTENSIONS:
-        try:
-            image_files = [f for f in glob.glob(image_dir + os.path.sep + "*." + extension)]
-            for image_file in image_files:
-#                print(image_file)
-                baseName = os.path.splitext(os.path.basename(image_file))[0]
-                try:
-                    db.execute("INSERT INTO TRUTHS(image_name,flag,comment,istruthed,inuse,time) VALUES (?,?,?,?,?,?)", (baseName,'','','0','0',time.time()))
-                    print("INSERT EXECUTED "+ image_file)
-                except Exception:
-                    print("INSERT NOT EXECUTED: " + image_file)
-                    traceback.print_exc()
-        except:
-            pass
+    image_files = get_all_image_ids(image_dir)
+    for image_file in image_files:
+        if Path(image_file).suffix in EXTENSIONS:
+            base_name = image_file.stem
+            try:
+                db.execute("INSERT INTO TRUTHS(image_name,flag,comment,istruthed,inuse,time) VALUES (?,?,?,?,?,?)", (base_name,'','','0','0',time.time()))
+                print("INSERT EXECUTED "+ str(image_file))
+            except Exception:
+                print("INSERT NOT EXECUTED: " + str(image_file))
+                traceback.print_exc()
+
+###############
+
+def get_all_image_ids(path):
+    return [Path(f) for f in Path(path).iterdir() if f.is_file()]
 ###############
 
 def main():

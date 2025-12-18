@@ -41,7 +41,6 @@ def print_address(f: str, sqliteDB: DB, truth: List[str]) -> List[str]:
         txt = clean_txt(txt)
         if not txt == "":
             address.append(txt)
-
         print(txt.encode('ascii', 'ignore').decode('ascii'), file=f)
     print("", file=f)
 
