@@ -78,10 +78,9 @@ def get_name(rs_data: List[str]) -> str:
         nm = re.sub("\\s+", " ", nm)
         return nm.strip()
 
-
 ##############################################################################
 
-def parse_result(result: str) -> Tuple[str, str, str] | None:
+def parse_zipcode_result(result: str) -> Tuple[str, str, str] | None:
     result = re.sub('-', '', result)
     if len(result) == 11:
         return result[0:5], result[5:-2], result[-2:]
@@ -91,14 +90,12 @@ def parse_result(result: str) -> Tuple[str, str, str] | None:
         return result[0:5], "", ""
     return None
 
-
 ##############################################################################
 
 def is_current_resident(address) -> bool:
     for w in current:
         word = r'\b' + w + r'\b'
         if not re.search(word, address) is None:
-            #            print(word,address)
             return True
     return False
 
@@ -191,7 +188,6 @@ def process(sqliteDB: DB, address_matcher_lines: list[str], nicknames_file: str,
 
         l = line.split(',')
         l = [v.strip() for v in l]
-        # S print(l)
         address_result = Field._make(l)
         image_id = address_result.IMAGE_ID
         if is_return_address:
