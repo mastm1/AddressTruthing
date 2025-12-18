@@ -18,24 +18,23 @@ from tkinter import Frame, StringVar, Button, Label, Listbox, Event, \
     messagebox, BooleanVar, DoubleVar, Text
 import traceback
 import os
-import glob
-from typing import List, TypedDict, Tuple, Union, Self, Any
+from pathlib import Path
+from typing import List, TypedDict, Tuple, Union, Self, Any, get_args
 import re
 import yaml
 
 from database.sqlite3db import DB
-
 YAML_FILE = 'FPARSTruth'
 with open(f'truther' + os.sep + f'{YAML_FILE}.yml', 'r') as f:
     yml_data = yaml.safe_load(f)
 is_wsl = False
 if platform.startswith("linux"):
     for c in yml_data['LINUX']['TESSDATA_PREFIX']:
-        if os.path.exists(c):
+        if Path(c).exists():
             os.environ['TESSDATA_PREFIX'] = c
             break
     for c in yml_data['LINUX']['TESSERACT_CMD']:
-        if os.path.exists(c):
+        if Path(c).exists():
             pytesseract.pytesseract.tesseract_cmd = c
             is_wsl  = True
             break
@@ -382,11 +381,6 @@ class FPARSTruthClass:
             print("SELECT id,image_name FAILED: ")
             traceback.print_exc()
             return "0"
-
-    ######################################################
-    def get_all_image_ids(self) -> List[str]:
-        return [os.path.splitext(os.path.basename(f))[0] for f in glob.glob(self.path + os.sep + "*")]
-
     #######################################################
     def click(self, event: Event):
         self.click_coords = self.get_event_point(self.canvas, event)
@@ -517,7 +511,7 @@ class FPARSTruthClass:
             except:
                 print("Image Load Failure: ROI " + self.in_path)
                 traceback.print_exc()
-        print(self.img_scale.shape)
+ #       print(self.img_scale.shape)
  #       b, g, r = cv2.split(self.img_scale)
  #       img2 = cv2.merge((r, g, b))
         im = Image.fromarray(self.img_scale)
@@ -574,16 +568,6 @@ class FPARSTruthClass:
         rotation_mat[1, 2] += bound_h / 2 - image_center[1]
         rotated_image = cv2.warpAffine(mat, rotation_mat, (bound_w, bound_h))
         mask, rotated_pil = getMaskedBox(rotated_image)
-        '''
-        new_width,new_height = rotated_pil.size
-        mx = max(new_width,new_height)
-        x = round(abs(mx - new_width) // 2)
-        y = round(abs(mx - new_height) // 2)
-        x_orig = (mx - width) // 2
-        y_orig = (mx - height) // 2
-        dis_x = round(abs(new_width - width) / 2)
-        dis_y = round(abs(new_height - height) / 2)
-        '''
         return rotated_image, rotated_pil, mask, image_center
 
 #######################################################
@@ -594,25 +578,24 @@ class FPARSTruthClass:
             self.paths = self.paths = self.db.select("SELECT image_dir FROM PATH ORDER BY time DESC")
         if self.path is not None:
             if self.extension is not None:
-                self.in_path = os.path.join(self.path, self.imageName) + '.' + self.extension
+                self.in_path = str(Path(self.path) / str(self.imageName + '.' + self.extension))
             else:
                 self.in_path = None
-            if self.in_path is None or os.path.exists(self.in_path):
+            if self.in_path is None or Path(self.in_path).exists():
                 for ext in EXTENSIONS:
-                    self.in_path = os.path.join(self.path, self.imageName) + '.' + ext
-                    if os.path.exists(self.in_path):
+                    self.in_path = str(Path(self.path) / str(self.imageName + '.' + ext))
+                    if Path(self.in_path).exists():
                         break
                     self.in_path = None
         else:
             for path in self.paths:
                 path = str(path[0])
                 for ext in EXTENSIONS:
-                    self.in_path = os.path.join(path, self.imageName) + '.' + ext
-                    if os.path.exists(self.in_path):
+                    self.in_path = Path(path) / str(self.imageName + '.' + ext)
+                    if Path(self.in_path).exists():
                         self.path = path
                         self.extension = ext
                         break
-
         if self.mode == MODES.REVIEWER or self.mode == MODES.TRUTHER:
             try:
                 self.load_image()
@@ -644,8 +627,6 @@ class FPARSTruthClass:
         if roi is not None:
             roi = self.scaleROI(roi, SCALE)
             cv2.rectangle(img, roi.top_left(), roi.bot_right(), color, thickness)
-
-    ######################################################
 
     ######################################################
 
@@ -844,8 +825,6 @@ class FPARSTruthClass:
     ######################################################
     def get_rois_from_truth_dict(self, truth_dict: Truth) -> tuple[list, Rect | None, list[Rect | None]]:
         inner_rois = []
- #       times = []
-#        if len(truth_dict.FIELDS) > 0:
         times = list(truth_dict.fields)
         times.sort()
         for aTime in times:
