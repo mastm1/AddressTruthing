@@ -34,6 +34,7 @@ def print_address_matcher_results(am_list):
     for ln in am_list:
         id = nm = zipcode = primary = pre_directional = streetname = suffix = \
             post_directional = firm = secondary_abbr = secondary_num = ""
+        # Implement a named_tuple instead?
         for i,am in enumerate(ln.split(',')):
             am = am.strip()
             match i:
@@ -134,4 +135,5 @@ if __name__ == '__main__':
         sys.stderr.write("The PCOA (forwarding address database) is not currently operational." + os.linesep)
 
     sys.stderr.flush()
+
 
