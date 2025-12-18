@@ -14,11 +14,12 @@ Ok.
 5) Above the list of files, click 'Code'. 
 6) under "HTTPS", click 'copy' icon 
 7) In 'wsl' terminal, 'git clone https://github.com/mastm1/AddressTruthing.git'
-d) In 'wsl' terminal, enter 'cd /MailPieceTruthing' e) Enter 'chmod +x *'
-9) 'conda env create -f environment.yml'
-10) 'conda activate fpars_env'
-11) 'python importFPARSImages.py -d images/A3/ -s A3.sqlite3' (creates a backend sqlite3 db using the sample images)
-12) 'python mainFPARS.py -s A3.sqlite3' (executes the "truther", try it out)
-13) Rubberband around the address in the image. Then rubberband around a region(a line or lines) in the newly created image to execute OCR.
-14) 'python MatchWithPostalDatabase.py -s A3.sqlite3' (Performs USPS lookup of the OCR results and gives 11 digit ZIP, if successful).
-15) The final post-processing script ('MatchWithPostalDatabse.py') is NOT fully operational! It requires US Postal Service address data which I cannot provide.
+8) In 'wsl' terminal, enter 'cd /MailPieceTruthing'
+9) Enter 'chmod +x *'
+10) 'conda env create -f environment.yml'
+11) 'conda activate fpars_env'
+12) 'python importFPARSImages.py -d images/A3/ -s A3.sqlite3' (creates a backend sqlite3 db using the sample images)
+13) 'python mainFPARS.py -s A3.sqlite3' (executes the "truther", try it out)
+14) Rubberband around the address in the image. Then rubberband around a region(a line or lines) in the newly created image to execute OCR.
+15) 'python MatchWithPostalDatabase.py -s A3.sqlite3' (Performs USPS lookup of the OCR results and gives 11 digit ZIP, if successful).
+16) The final post-processing script ('MatchWithPostalDatabse.py') is NOT fully operational! It requires US Postal Service address data which I cannot provide.
