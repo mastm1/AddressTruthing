@@ -1,6 +1,6 @@
 An in house Python tool to truth(the capture of address text) a directory of images. Simple tkinter GUI used for the truthing interface and command line scripts for setting up image sets and post-processing results. SqlLite is used as backend storage of data. Tesseract is used to perform OCR. An old C executable for parsing text addresses and lookups into a national USPS directory of addresses is used for determing the 11 digit USPS encoding of the address, if possible.
 
-ToDo: Commenting! I wrote most of this quickly with few comments. It was intended as a supplemental tool to expedite my standard process at CEDAR/Cubs at SUNY BUffalo.
+ToDo: Commenting! I wrote most of this quickly with few comments. It was intended as a supplemental tool to expedite my standard process at CEDAR/Cubs at SUNY BUffalo. Also, implement a more advanced OCR package rather than Tesseract.
 
 NicK:  I just realized that 'teeseract_ocr' needs to be installed. This is in addition to the python package wrapper 'pytesseract'). Also, it would need to be installed separately for both wsl linux and windows, depending on your preference.
 1) Turns out I could not get the address directory files on github(too large) to run the C executable. The executable was compiled on Linux, which is why I had instructions below for 'wsl' on Windows. Not to mention the fact that the data is from non-public US Postal Service sources...
