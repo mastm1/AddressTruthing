@@ -4,7 +4,7 @@ ToDo: Commenting! I wrote most of this quickly with few comments. It was intende
 
 NicK:  I just realized that 'teeseract_ocr' needs to be installed. This is in addition to the python package wrapper 'pytesseract'). Also, it would need to be installed separately for both wsl linux and windows, depending on your preference.
 1) Turns out I could not get the address directory files on github(too large) to run the C executable. The executable was compiled on Linux, which is why I had instructions below for 'wsl' on Windows. Not to mention the fact that the data is from non-public US Postal Service sources...
-2) The last python script will abort without doing the USPS database lookups. 
+2) The last python script will abort without doing the USPS database lookups. The data is huge and not something I can publically use.
 3) Ugh. I had to install Visual C++ Redistributable of Visual Studio to use 'opencv' on Windows and I'm still getting an error.
 4) Best to stick with 'wsl'...
 
