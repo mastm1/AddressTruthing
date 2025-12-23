@@ -74,23 +74,9 @@ def print_address_matcher_results(am_list):
 
 @timer
 def execute_address_matcher(export_tmp_file):
-    sys.stderr.write("Executing address matcher...")
-    sys.stderr.flush()
     command = [ADDRESS_MATCHER_EXE, '-f', ADDRESS_MATCHER_CONFIG, '-i', export_tmp_file, '-verbose']
-    print(command)
-    address_matcher_tmp_file = str(random_num) + "-out.txt"
-    with open(address_matcher_tmp_file,'w') as file:
-        proc = subprocess.Popen(command, stdout=file,stderr=subprocess.DEVNULL,bufsize=0)
-    proc.wait()
-    address_matcher_lines = []
-    with open(address_matcher_tmp_file, 'r') as file:
-        for line in file:
-            address_matcher_lines.append(line)
-    sys.stdout.flush()
-    sys.stderr.write("complete\n")
-    sys.stderr.flush()
-    os.remove(address_matcher_tmp_file)
-    #print(address_matcher_lines)
+    proc = subprocess.run(command,capture_output=True)
+    address_matcher_lines = proc.stdout.decode('UTF-8').split(os.linesep)
     return address_matcher_lines
 
 if __name__ == '__main__':
@@ -118,14 +104,20 @@ if __name__ == '__main__':
     sys.stderr.flush()
     exp.export(db,out_file=export_tmp_file)
     sys.stderr.write("complete\n")
+    sys.stderr.flush()
     try:
+        sys.stderr.write("Executing address matcher...")
+        sys.stderr.flush()
         address_matcher_lines,address_matcher_time = execute_address_matcher(export_tmp_file)
+        sys.stderr.write("complete\n\n\n")
+        sys.stderr.flush()
         print_address_matcher_results(address_matcher_lines)
+
     except Exception as e:
         sys.stderr.write("Error executing the Address Matcher. Address Matcher configuration file might need modification." + os.linesep)
         sys.stderr.flush()
-
     os.remove(export_tmp_file)
+
     try:
         sys.stderr.write("Looking up Names...\n")
         sys.stderr.flush()
